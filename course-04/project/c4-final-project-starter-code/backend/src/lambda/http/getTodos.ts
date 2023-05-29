@@ -3,18 +3,26 @@ import 'source-map-support/register'
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import * as middy from 'middy'
 import { cors } from 'middy/middlewares'
-
-import { getTodosForUser as getTodosForUser } from '../../businessLogic/todos'
+import { createLogger } from '../../utils/logger';
+import { getTodosForUser as getTodosForUser } from '../../helpers/todos'
 import { getUserId } from '../utils';
-
-// TODO: Get all TODO items for a current user
+import * as AWS from 'aws-sdk'
+import * as AWSXRay from 'aws-xray-sdk'
+const XAWS = AWSXRay.captureAWS(AWS)
+const logger = createLogger("GetAPI");
 export const handler = middy(
   async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     // Write your code here
-    const todos = '...'
+    try {
+      let userId = getUserId(event);
+      const todos = await getTodosForUser(userId);
+      return { statusCode: 200, body: JSON.stringify(todos) }
+    } catch (error) {
+      logger.error(error);
+      return { statusCode: 500, body: error.message || "Internal server error" }
+    }
 
-    return undefined
-
+  })
 handler.use(
   cors({
     credentials: true

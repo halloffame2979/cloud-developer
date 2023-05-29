@@ -1,16 +1,22 @@
 {
   "compilerOptions": {
     "lib": [
-      "es2017"
+      "es2017",
+      "ES2021"
     ],
+    "module": "commonjs",
+    "allowUnusedLabels": true,
     "moduleResolution": "node",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false,
+    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "target": "es2017",
     "outDir": "lib"
   },
+  "include": [
+    "src"
+  ],
   "exclude": [
-    "node_modules"
+    "node_modules/"
   ]
 }
