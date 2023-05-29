@@ -1,22 +1,19 @@
-# Archival Note
-**Fork** the Udacity's repository to your personal Github account and clone to your local. We do not encourage pushing your personal development work to the Udacity's starter repository. Therefore, we've decided to archive this repository. However, learners will be able to fork it to their personal Github account but cannot submit PRs to this repository. If you have any issues or suggestions to make, feel free to:
-- Utilize the https://knowledge.udacity.com/ forum to seek help on content-specific issues.
-- Submit a support ticket along with the link to your forked repository if (learners are) blocked for other reasons. You can find the link to file a support ticket in your classroom home. 
+Get all todo for user
+![Get](https://github.com/halloffame2979/cloud-developer/blob/dev/Evidence/getTodo.PNG)
+Create todo
+![Post](https://github.com/halloffame2979/cloud-developer/blob/dev/Evidence/creatTodo.PNG)
+Update todo
+![Patch](https://github.com/halloffame2979/cloud-developer/blob/dev/Evidence/updateTodo.PNG)
+Delete todo
+![Delete](https://github.com/halloffame2979/cloud-developer/blob/dev/Evidence/deleteTodo.PNG)
+AddImg
+![AddImg](https://github.com/halloffame2979/cloud-developer/blob/dev/Evidence/add%20image(0).PNG)
+![AddImg](https://github.com/halloffame2979/cloud-developer/blob/dev/Evidence/add%20image(1).PNG)
+Other user
+![OtherUser](https://github.com/halloffame2979/cloud-developer/blob/dev/Evidence/otherUser.PNG)
+Trace
+![Trace](https://github.com/halloffame2979/cloud-developer/blob/dev/Evidence/tracing.PNG)
 
-# ND9990 cloud-developer
-Content for Udacity's cloud developer nanodegree's following two courses:
-* Course 02 - Full Stack Apps on AWS
-* Course 04 - Develop & Deploy Serverless App
-
-Here is the repository structure:
-```bash
-├── README.md
-├── course-02
-│   ├── exercises
-│   └── project
-└── course-04
-    ├── exercises
-    └── project
-```
+Other reference at: (https://github.com/halloffame2979/cloud-developer/tree/dev/Evidence)
 
 
