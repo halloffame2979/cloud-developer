@@ -42,15 +42,6 @@ provider:
     # Enable API Gateway logs
     restApi: true
 
-  iam:
-    role:
-      statements:
-        - Effect: Allow
-          Action:
-            - xray:PutTelemetryRecords
-            - xray:PutTraceSegments
-          Resource: "*"
-
 functions:
   Auth:
     handler: lib/lambda/auth/auth0Authorizer.handler
@@ -75,7 +66,11 @@ functions:
           - dynamodb:BatchGetItem
           - dynamodb:GetItem
         Resource: arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/*
-    iamRoleStatementsInherit: true
+      - Effect: Allow
+        Action:
+          - xray:PutTelemetryRecords
+          - xray:PutTraceSegments
+        Resource: "*"
   # To refer to an AWS resource defined in the "Resources" section, you can use "Resource: !GetAtt <resource-name>.Arn"
   # To validate incoming HTTP requests, we have provided the request schemas in function definition below.
   CreateTodo:
@@ -98,7 +93,11 @@ functions:
           - dynamodb:GetItem
           - dynamodb:PutItem
         Resource: arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/*
-    iamRoleStatementsInherit: true
+      - Effect: Allow
+        Action:
+          - xray:PutTelemetryRecords
+          - xray:PutTraceSegments
+        Resource: "*"
   # TODO: Configure this function
   # Provide property for setting up CORS, Authorizer, iamRoleStatements, and request schemas
   UpdateTodo:
@@ -109,6 +108,9 @@ functions:
           path: todos/{todoId}
           cors: true
           authorizer: Auth
+          request:
+            schemas:
+              application/json: ${file(models/update-todo-model.json)}
     iamRoleStatements:
       - Effect: "Allow"
         Action:
@@ -118,7 +120,11 @@ functions:
           - dynamodb:GetItem
           - dynamodb:UpdateItem
         Resource: arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/*
-    iamRoleStatementsInherit: true
+      - Effect: Allow
+        Action:
+          - xray:PutTelemetryRecords
+          - xray:PutTraceSegments
+        Resource: "*"
   # Provide property for setting up CORS, Authorizer, iamRoleStatements
   DeleteTodo:
     handler: lib/lambda/http/deleteTodo.handler
@@ -137,7 +143,11 @@ functions:
           - dynamodb:GetItem
           - dynamodb:DeleteItem
         Resource: arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/*
-    iamRoleStatementsInherit: true
+      - Effect: Allow
+        Action:
+          - xray:PutTelemetryRecords
+          - xray:PutTraceSegments
+        Resource: "*"
   # Provide property for setting up CORS, Authorizer, iamRoleStatements
   GenerateUploadUrl:
     handler: lib/lambda/http/generateUploadUrl.handler
@@ -164,9 +174,13 @@ functions:
           - "/"
           - - !GetAtt TodoAttachmentsBucket.Arn
             - "*"
+      - Effect: Allow
+        Action:
+          - xray:PutTelemetryRecords
+          - xray:PutTraceSegments
+        Resource: "*"
     environment:
       BUCKET_NAME: !Ref TodoAttachmentsBucket
-    iamRoleStatementsInherit: true
 resources:
   Resources:
     # Add necessary AWS resources. You will need at least the following AWS resources
